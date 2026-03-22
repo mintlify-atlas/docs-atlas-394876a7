@@ -1,0 +1,101 @@
+{
+  "projectType": "sdk-library",
+  "projectName": "TSS — Tea Simple Smart CSS",
+  "projectDescription": "A zero-config, lightweight utility-first CSS engine that auto-generates styles at runtime and provides seamless automatic light/dark mode switching via CSS custom properties.",
+  "theme": "palm",
+  "primaryColor": "#848c8e",
+  "lightColor": "#11161e",
+  "darkColor": "#cfd0d2",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": ["introduction", "installation", "quickstart"]
+          },
+          {
+            "group": "Core Concepts",
+            "pages": [
+              "concepts/how-it-works",
+              "concepts/light-dark-mode",
+              "concepts/semantic-colors"
+            ]
+          },
+          {
+            "group": "Utility Reference",
+            "pages": [
+              "utilities/layout",
+              "utilities/spacing",
+              "utilities/typography",
+              "utilities/colors",
+              "utilities/borders",
+              "utilities/sizing",
+              "utilities/flexbox",
+              "utilities/grid",
+              "utilities/effects"
+            ]
+          },
+          {
+            "group": "Guides",
+            "pages": [
+              "guides/cdn-usage",
+              "guides/npm-esm",
+              "guides/dark-mode-toggle",
+              "guides/custom-tokens"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "JavaScript API",
+            "pages": [
+              "api/overview",
+              "api/toggle-dark",
+              "api/refresh",
+              "api/parse"
+            ]
+          },
+          {
+            "group": "Design Tokens",
+            "pages": [
+              "api/tokens/spacing",
+              "api/tokens/colors",
+              "api/tokens/typography",
+              "api/tokens/borders",
+              "api/tokens/shadows"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "keyFeatures": [
+    "Zero-config setup — drop in a single script tag via CDN and utility classes work immediately",
+    "Automatic light/dark mode via CSS custom properties and prefers-color-scheme media query",
+    "Runtime CSS generation — scans DOM and generates only the CSS rules actually used",
+    "MutationObserver integration for dynamic content — new elements are styled automatically",
+    "Comprehensive design token system: spacing, color palettes, typography, borders, shadows, z-index, opacity",
+    "Semantic color tokens (primary, secondary, surface, heading, body, danger, etc.) that adapt to theme",
+    "ESM, IIFE, and minified CDN builds with TypeScript declaration files",
+    "Theme persistence via localStorage with manual toggleDark() API",
+    "Tailwind-compatible class naming convention for familiar developer experience"
+  ],
+  "publicApiSurface": [
+    "version — string constant with the current TSS version",
+    "refresh() — re-scans the DOM and flushes any pending CSS rules",
+    "toggleDark() — toggles between light and dark mode and persists preference to localStorage",
+    "parse(className) — parses a utility class name and returns { selector, rules } or null",
+    "parseClass(className) — low-level class parser (also exported for direct use)",
+    "buildThemeCSS() — generates the full theme CSS string with CSS custom properties",
+    "TSS global — IIFE global object exposing version, refresh, toggleDark, parse",
+    "dist/tss.js — IIFE build for CDN / script tag usage",
+    "dist/tss.min.js — Minified IIFE build",
+    "dist/tss.esm.js — ES module build for bundler usage",
+    "dist/index.d.ts — TypeScript declaration file"
+  ]
+}
