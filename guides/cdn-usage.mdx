@@ -1,0 +1,92 @@
+---
+title: "CDN usage"
+description: "Add TSS to any HTML page with a single script tag — no build tools required."
+---
+
+TSS ships a pre-built minified IIFE bundle that exposes a global `TSS` object. Drop it into any HTML page and start using utility classes immediately.
+
+## Script tag
+
+<CodeGroup>
+
+```html jsDelivr (recommended)
+<script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css/dist/tss.min.js"></script>
+```
+
+```html unpkg
+<script src="https://unpkg.com/tea-simple-smart-css/dist/tss.min.js"></script>
+```
+
+```html Pinned version
+<script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css@1.0.3/dist/tss.min.js"></script>
+```
+
+</CodeGroup>
+
+<Tip>
+Place the `<script>` tag inside `<head>` before your page content to avoid a flash of unstyled elements on first load.
+</Tip>
+
+## Complete HTML template
+
+```html index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My App</title>
+  <script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css/dist/tss.min.js"></script>
+</head>
+<body class="bg-base text-body min-h-screen">
+
+  <header class="bg-surface border-b border-divider px-6 py-4 flex items-center justify-between">
+    <h1 class="text-xl font-bold text-heading">My App</h1>
+    <button
+      class="bg-accent text-primary px-4 py-2 rounded-lg cursor-pointer transition-colors"
+      onclick="TSS.toggleDark()"
+    >
+      Toggle Theme
+    </button>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-8">
+    <div class="bg-secondary rounded-lg p-6 border border-outline shadow-md">
+      <h2 class="text-2xl font-semibold text-heading mb-2">Hello, TSS!</h2>
+      <p class="text-body">This page uses zero build tools.</p>
+    </div>
+  </main>
+
+</body>
+</html>
+```
+
+## Global TSS object
+
+Once the script loads, a global `TSS` object is available:
+
+| Property / Method | Returns | Description |
+|-------------------|---------|-------------|
+| `TSS.version` | `string` | Current library version |
+| `TSS.toggleDark()` | `boolean` | Toggles dark mode; returns `true` when now dark |
+| `TSS.refresh()` | `void` | Re-scans the DOM for new utility classes |
+| `TSS.parse(className)` | `object \| null` | Parses a class name into `{ selector, rules }` |
+
+```html
+<script>
+  console.log(TSS.version); // "1.0.3"
+
+  document.getElementById('toggle').addEventListener('click', function () {
+    var isDark = TSS.toggleDark();
+    console.log('Dark mode is now:', isDark);
+  });
+
+  // After dynamically adding elements, re-scan
+  document.body.appendChild(newElement);
+  TSS.refresh();
+</script>
+```
+
+<Note>
+TSS automatically watches for new DOM nodes via a `MutationObserver`, so you only need `TSS.refresh()` in rare cases where mutations are not detected — for example, bulk `innerHTML` replacement.
+</Note>

@@ -1,0 +1,253 @@
+---
+title: "Effects"
+description: "Shadows, opacity, transitions, cursor, and miscellaneous utilities."
+---
+
+## Shadows
+
+Apply `box-shadow` to elements with `shadow` and `shadow-{size}` utilities.
+
+| Class | CSS |
+|-------|-----|
+| `shadow-sm` | `box-shadow: 0 1px 2px 0 rgba(0,0,0,0.05)` |
+| `shadow` | `box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1)` |
+| `shadow-md` | `box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1)` |
+| `shadow-lg` | `box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)` |
+| `shadow-xl` | `box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)` |
+| `shadow-2xl` | `box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25)` |
+| `shadow-none` | `box-shadow: none` |
+
+```html
+<div class="shadow-sm rounded-lg p-4">Subtle shadow</div>
+<div class="shadow rounded-lg p-4">Default shadow</div>
+<div class="shadow-xl rounded-xl p-6">Elevated modal-style card</div>
+```
+
+---
+
+## Opacity
+
+Control the `opacity` of an element.
+
+| Class | CSS |
+|-------|-----|
+| `opacity-0` | `opacity: 0` |
+| `opacity-5` | `opacity: 0.05` |
+| `opacity-10` | `opacity: 0.1` |
+| `opacity-15` | `opacity: 0.15` |
+| `opacity-20` | `opacity: 0.2` |
+| `opacity-25` | `opacity: 0.25` |
+| `opacity-30` | `opacity: 0.3` |
+| `opacity-40` | `opacity: 0.4` |
+| `opacity-50` | `opacity: 0.5` |
+| `opacity-60` | `opacity: 0.6` |
+| `opacity-70` | `opacity: 0.7` |
+| `opacity-75` | `opacity: 0.75` |
+| `opacity-80` | `opacity: 0.8` |
+| `opacity-90` | `opacity: 0.9` |
+| `opacity-95` | `opacity: 0.95` |
+| `opacity-100` | `opacity: 1` |
+
+```html
+<!-- Disabled state -->
+<button class="opacity-50" disabled>Disabled button</button>
+
+<!-- Subtle background overlay -->
+<div class="fixed inset-0 bg-black opacity-40"></div>
+```
+
+---
+
+## Transitions
+
+Smooth state changes with transition utilities. All transition classes default to `150ms` duration and the `cubic-bezier(0.4, 0, 0.2, 1)` easing function.
+
+### Transition Properties
+
+| Class | `transition-property` |
+|-------|----------------------|
+| `transition` | `color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter` |
+| `transition-all` | `all` |
+| `transition-colors` | `color, background-color, border-color, text-decoration-color, fill, stroke` |
+| `transition-opacity` | `opacity` |
+| `transition-shadow` | `box-shadow` |
+| `transition-transform` | `transform` |
+| `transition-none` | `none` |
+
+### Duration
+
+Override the transition duration with `duration-{ms}` where `{ms}` is any number of milliseconds.
+
+```html
+<button class="transition-colors duration-300">Slow color fade</button>
+<div class="transition-opacity duration-75">Fast fade</div>
+```
+
+### Easing
+
+| Class | `transition-timing-function` |
+|-------|-----------------------------|
+| `ease-linear` | `linear` |
+| `ease-in` | `cubic-bezier(0.4, 0, 1, 1)` |
+| `ease-out` | `cubic-bezier(0, 0, 0.2, 1)` |
+| `ease-in-out` | `cubic-bezier(0.4, 0, 0.2, 1)` |
+
+```html
+<!-- Hover color transition -->
+<button class="bg-accent text-white transition-colors duration-150 ease-in-out">
+  Hover me
+</button>
+
+<!-- Fade in/out an element -->
+<div class="opacity-0 transition-opacity duration-200 ease-out">
+  Fade target
+</div>
+
+<!-- Shadow on hover -->
+<div class="shadow transition-shadow duration-200 ease-in-out">
+  Card with hover shadow
+</div>
+```
+
+---
+
+## Cursor
+
+Change the mouse cursor with `cursor-{value}` utilities.
+
+| Class | CSS |
+|-------|-----|
+| `cursor-auto` | `cursor: auto` |
+| `cursor-default` | `cursor: default` |
+| `cursor-pointer` | `cursor: pointer` |
+| `cursor-wait` | `cursor: wait` |
+| `cursor-text` | `cursor: text` |
+| `cursor-move` | `cursor: move` |
+| `cursor-help` | `cursor: help` |
+| `cursor-not-allowed` | `cursor: not-allowed` |
+| `cursor-none` | `cursor: none` |
+| `cursor-context-menu` | `cursor: context-menu` |
+| `cursor-progress` | `cursor: progress` |
+| `cursor-cell` | `cursor: cell` |
+| `cursor-crosshair` | `cursor: crosshair` |
+| `cursor-vertical-text` | `cursor: vertical-text` |
+| `cursor-alias` | `cursor: alias` |
+| `cursor-copy` | `cursor: copy` |
+| `cursor-no-drop` | `cursor: no-drop` |
+| `cursor-grab` | `cursor: grab` |
+| `cursor-grabbing` | `cursor: grabbing` |
+| `cursor-col-resize` | `cursor: col-resize` |
+| `cursor-row-resize` | `cursor: row-resize` |
+| `cursor-zoom-in` | `cursor: zoom-in` |
+| `cursor-zoom-out` | `cursor: zoom-out` |
+
+```html
+<button class="cursor-pointer">Clickable</button>
+<div class="cursor-not-allowed opacity-50">Disabled area</div>
+<div class="cursor-grab">Draggable item</div>
+```
+
+---
+
+## Miscellaneous
+
+### Text Selection
+
+| Class | CSS |
+|-------|-----|
+| `select-none` | `user-select: none` |
+| `select-text` | `user-select: text` |
+| `select-all` | `user-select: all` |
+| `select-auto` | `user-select: auto` |
+
+### Outline
+
+| Class | CSS |
+|-------|-----|
+| `outline-none` | `outline: 2px solid transparent; outline-offset: 2px` |
+| `outline` | `outline-style: solid` |
+
+### Appearance
+
+| Class | CSS |
+|-------|-----|
+| `appearance-none` | `appearance: none` |
+
+### List Style
+
+| Class | CSS |
+|-------|-----|
+| `list-none` | `list-style-type: none` |
+| `list-disc` | `list-style-type: disc` |
+| `list-decimal` | `list-style-type: decimal` |
+
+### Pointer Events
+
+| Class | CSS |
+|-------|-----|
+| `pointer-events-none` | `pointer-events: none` |
+| `pointer-events-auto` | `pointer-events: auto` |
+
+### Resize
+
+| Class | CSS |
+|-------|-----|
+| `resize-none` | `resize: none` |
+| `resize` | `resize: both` |
+| `resize-x` | `resize: horizontal` |
+| `resize-y` | `resize: vertical` |
+
+### Table
+
+| Class | CSS |
+|-------|-----|
+| `border-collapse` | `border-collapse: collapse` |
+| `border-separate` | `border-collapse: separate` |
+
+### Object Fit
+
+| Class | CSS |
+|-------|-----|
+| `object-cover` | `object-fit: cover` |
+| `object-contain` | `object-fit: contain` |
+| `object-fill` | `object-fit: fill` |
+| `object-none` | `object-fit: none` |
+
+### Screen Reader Visibility
+
+| Class | CSS |
+|-------|-----|
+| `sr-only` | `position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0` |
+| `not-sr-only` | `position: static; width: auto; height: auto; padding: 0; margin: 0; overflow: visible; clip: auto; white-space: normal` |
+
+### Font Smoothing
+
+| Class | CSS |
+|-------|-----|
+| `antialiased` | `-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale` |
+
+```html
+<!-- Hidden but accessible label for screen readers -->
+<button>
+  <svg aria-hidden="true">...</svg>
+  <span class="sr-only">Close dialog</span>
+</button>
+
+<!-- Prevent text selection on a UI element -->
+<div class="select-none">
+  <span>Drag handle</span>
+</div>
+
+<!-- Image cover in a fixed container -->
+<div class="w-48 h-32 overflow-hidden rounded-lg">
+  <img class="w-full h-full object-cover" src="photo.jpg" />
+</div>
+
+<!-- Vertically resizable textarea -->
+<textarea class="resize-y w-full border rounded-md p-2"></textarea>
+
+<!-- Remove native select appearance -->
+<select class="appearance-none border rounded px-3 py-2">
+  <option>Option 1</option>
+</select>
+```

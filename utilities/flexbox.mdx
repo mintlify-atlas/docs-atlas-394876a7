@@ -1,0 +1,191 @@
+---
+title: "Flexbox"
+description: "Flex direction, wrap, alignment, and justify utilities."
+---
+
+Flexbox utilities work together with `flex` or `inline-flex` from the [Layout](/utilities/layout#display) display utilities.
+
+---
+
+## Flex Direction
+
+Control the direction flex items are placed in the flex container.
+
+| Class | CSS |
+|-------|-----|
+| `flex-row` | `flex-direction: row` |
+| `flex-row-reverse` | `flex-direction: row-reverse` |
+| `flex-col` | `flex-direction: column` |
+| `flex-col-reverse` | `flex-direction: column-reverse` |
+
+```html
+<div class="flex flex-row gap-4">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+<div class="flex flex-col gap-2">
+  <div>Top</div>
+  <div>Bottom</div>
+</div>
+```
+
+---
+
+## Flex Wrap
+
+Control whether flex items wrap onto new lines.
+
+| Class | CSS |
+|-------|-----|
+| `flex-wrap` | `flex-wrap: wrap` |
+| `flex-wrap-reverse` | `flex-wrap: wrap-reverse` |
+| `flex-nowrap` | `flex-wrap: nowrap` |
+
+```html
+<!-- Tags that wrap to new lines -->
+<div class="flex flex-wrap gap-2">
+  <span class="px-2 py-1 rounded-full bg-secondary">Tag 1</span>
+  <span class="px-2 py-1 rounded-full bg-secondary">Tag 2</span>
+  <span class="px-2 py-1 rounded-full bg-secondary">Tag 3</span>
+</div>
+```
+
+---
+
+## Flex Sizing
+
+Control how flex items grow and shrink.
+
+| Class | CSS |
+|-------|-----|
+| `flex-1` | `flex: 1 1 0%` |
+| `flex-auto` | `flex: 1 1 auto` |
+| `flex-initial` | `flex: 0 1 auto` |
+| `flex-none` | `flex: none` |
+| `flex-grow` | `flex-grow: 1` |
+| `flex-grow-0` | `flex-grow: 0` |
+| `flex-shrink` | `flex-shrink: 1` |
+| `flex-shrink-0` | `flex-shrink: 0` |
+
+```html
+<!-- Sidebar + main content layout -->
+<div class="flex">
+  <aside class="flex-none w-64">Sidebar</aside>
+  <main class="flex-1">Main content grows to fill remaining space</main>
+</div>
+
+<!-- Prevent an icon from shrinking -->
+<div class="flex items-center gap-3">
+  <svg class="flex-shrink-0 w-5 h-5">...</svg>
+  <span>Long label that can wrap</span>
+</div>
+```
+
+---
+
+## Align Items
+
+Control how flex items are aligned along the cross axis.
+
+| Class | CSS |
+|-------|-----|
+| `items-start` | `align-items: flex-start` |
+| `items-end` | `align-items: flex-end` |
+| `items-center` | `align-items: center` |
+| `items-baseline` | `align-items: baseline` |
+| `items-stretch` | `align-items: stretch` |
+
+```html
+<!-- Vertically centered row -->
+<div class="flex items-center gap-3">
+  <img class="w-8 h-8 rounded-full" src="avatar.png" />
+  <span>Username</span>
+</div>
+
+<!-- Align to text baseline -->
+<div class="flex items-baseline gap-2">
+  <span class="text-3xl font-bold">42</span>
+  <span class="text-sm text-subtle">items</span>
+</div>
+```
+
+---
+
+## Justify Content
+
+Control how flex items are distributed along the main axis.
+
+| Class | CSS |
+|-------|-----|
+| `justify-start` | `justify-content: flex-start` |
+| `justify-end` | `justify-content: flex-end` |
+| `justify-center` | `justify-content: center` |
+| `justify-between` | `justify-content: space-between` |
+| `justify-around` | `justify-content: space-around` |
+| `justify-evenly` | `justify-content: space-evenly` |
+
+```html
+<!-- Navigation bar with logo left, links right -->
+<nav class="flex justify-between items-center px-6 py-4">
+  <a href="/">Logo</a>
+  <div class="flex gap-4">
+    <a href="/about">About</a>
+    <a href="/docs">Docs</a>
+  </div>
+</nav>
+
+<!-- Centered hero content -->
+<section class="flex flex-col items-center justify-center min-h-screen">
+  <h1 class="text-4xl font-bold">Hero heading</h1>
+  <p class="text-body mt-4">Subtitle text</p>
+</section>
+```
+
+---
+
+## Align Self
+
+Override the `align-items` value for individual flex items.
+
+| Class | CSS |
+|-------|-----|
+| `self-auto` | `align-self: auto` |
+| `self-start` | `align-self: flex-start` |
+| `self-end` | `align-self: flex-end` |
+| `self-center` | `align-self: center` |
+| `self-stretch` | `align-self: stretch` |
+| `self-baseline` | `align-self: baseline` |
+
+```html
+<!-- One item sticks to the bottom of a flex row -->
+<div class="flex items-start gap-4 h-32">
+  <div>Top aligned (default)</div>
+  <div class="self-end">Bottom aligned</div>
+  <div class="self-center">Center aligned</div>
+</div>
+```
+
+---
+
+## Common Patterns
+
+```html
+<!-- Centered content (both axes) -->
+<div class="flex items-center justify-center h-screen">
+  <p>Perfectly centered</p>
+</div>
+
+<!-- Horizontal card list with gap -->
+<div class="flex flex-wrap gap-4">
+  <div class="flex-1 min-w-48 bg-surface rounded-lg p-4">Card</div>
+  <div class="flex-1 min-w-48 bg-surface rounded-lg p-4">Card</div>
+  <div class="flex-1 min-w-48 bg-surface rounded-lg p-4">Card</div>
+</div>
+
+<!-- Split row: title left, action right -->
+<div class="flex items-center justify-between">
+  <h2 class="text-lg font-semibold">Section title</h2>
+  <button class="text-sm text-link">View all</button>
+</div>
+```

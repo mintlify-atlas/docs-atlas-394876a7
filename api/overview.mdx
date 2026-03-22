@@ -1,0 +1,62 @@
+---
+title: API overview
+description: The TSS JavaScript API surface.
+---
+
+TSS exposes a small JavaScript API through both the `TSS` global (IIFE/CDN) and named ESM exports. There is no manual setup required — TSS auto-initializes on `DOMContentLoaded`.
+
+## Exports
+
+| Export | CDN (global) | ESM import | Type | Description |
+|--------|-------------|------------|------|-------------|
+| `version` | `TSS.version` | `import { version }` | `string` | Library version |
+| `refresh` | `TSS.refresh()` | `import { refresh }` | `() => void` | Re-scan DOM |
+| `toggleDark` | `TSS.toggleDark()` | `import { toggleDark }` | `() => boolean` | Toggle dark mode |
+| `parse` | `TSS.parse(cls)` | `import { parse }` | `(string) => ParseResult \| null` | Parse a class name |
+
+## Quick reference
+
+```javascript
+// CDN / IIFE global
+TSS.version;
+TSS.refresh();
+TSS.toggleDark();
+TSS.parse('flex');
+
+// ESM named imports
+import { version, refresh, toggleDark, parse } from 'tea-simple-smart-css';
+```
+
+## ParseResult type
+
+Functions that parse class names return a `ParseResult` object or `null`.
+
+```typescript
+interface ParseResult {
+  selector: string;
+  rules: Record<string, string>;
+}
+```
+
+## Auto-initialization
+
+<Info>
+  TSS auto-initializes on `DOMContentLoaded`. When using the CDN build, no manual setup is needed — simply include the script tag and TSS will scan the DOM and inject styles automatically.
+</Info>
+
+## API reference
+
+<CardGroup cols={2}>
+  <Card title="toggleDark()" icon="moon" href="/api/toggle-dark">
+    Toggle between light and dark mode and persist the preference.
+  </Card>
+  <Card title="refresh()" icon="rotate-cw" href="/api/refresh">
+    Re-scan the DOM and flush any pending CSS rules.
+  </Card>
+  <Card title="parse()" icon="code" href="/api/parse">
+    Parse a TSS utility class name into its CSS selector and rules.
+  </Card>
+  <Card title="Design Tokens" icon="palette" href="/api/tokens/spacing">
+    Spacing, color, and other design token reference.
+  </Card>
+</CardGroup>

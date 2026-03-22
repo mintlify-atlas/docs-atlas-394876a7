@@ -1,0 +1,163 @@
+---
+title: "Borders"
+description: "Border width, color, radius, and style utilities."
+---
+
+## Border Width
+
+Add or remove borders with `border` and `border-{size}` utilities.
+
+| Class | CSS |
+|-------|-----|
+| `border` | `border-width: 1px; border-style: solid; border-color: var(--tss-outline)` |
+| `border-0` | `border-width: 0` |
+| `border-2` | `border-width: 2px` |
+| `border-4` | `border-width: 4px` |
+| `border-8` | `border-width: 8px` |
+
+<Note>
+  The bare `border` class also sets `border-style: solid` and `border-color: var(--tss-outline)` as convenient defaults. The sized variants (`border-2`, `border-4`, `border-8`) only set `border-width` — you may want to pair them with a border style and color class.
+</Note>
+
+### Sides
+
+Apply borders to individual sides with `border-{side}` or `border-{side}-{size}`.
+
+| Class | CSS |
+|-------|-----|
+| `border-t` | `border-top-width: 1px` |
+| `border-r` | `border-right-width: 1px` |
+| `border-b` | `border-bottom-width: 1px` |
+| `border-l` | `border-left-width: 1px` |
+| `border-t-2` | `border-top-width: 2px` |
+| `border-r-2` | `border-right-width: 2px` |
+| `border-b-2` | `border-bottom-width: 2px` |
+| `border-l-2` | `border-left-width: 2px` |
+| `border-t-4` | `border-top-width: 4px` |
+| `border-r-4` | `border-right-width: 4px` |
+| `border-b-4` | `border-bottom-width: 4px` |
+| `border-l-4` | `border-left-width: 4px` |
+| `border-t-8` | `border-top-width: 8px` |
+| `border-r-8` | `border-right-width: 8px` |
+| `border-b-8` | `border-bottom-width: 8px` |
+| `border-l-8` | `border-left-width: 8px` |
+| `border-t-0` | `border-top-width: 0` |
+| `border-r-0` | `border-right-width: 0` |
+| `border-b-0` | `border-bottom-width: 0` |
+| `border-l-0` | `border-left-width: 0` |
+
+```html
+<!-- Standard bordered card -->
+<div class="border rounded-lg p-4">
+  Card content
+</div>
+
+<!-- Bottom border only -->
+<div class="border-b border-solid border-divider py-3">
+  Divider row
+</div>
+
+<!-- Thicker left accent -->
+<div class="border-l-4 border-accent pl-4">
+  Accent callout
+</div>
+```
+
+---
+
+## Border Style
+
+| Class | CSS |
+|-------|-----|
+| `border-solid` | `border-style: solid` |
+| `border-dashed` | `border-style: dashed` |
+| `border-dotted` | `border-style: dotted` |
+| `border-double` | `border-style: double` |
+| `border-none` | `border-style: none` |
+
+```html
+<div class="border-2 border-dashed border-outline rounded-lg p-4">
+  Dashed upload zone
+</div>
+```
+
+---
+
+## Border Color
+
+Border colors follow the same color system as `bg-` and `text-`. Use semantic tokens for automatic light/dark adaptation, or palette colors for fixed values.
+
+```html
+<!-- Semantic border color -->
+<div class="border border-solid border-outline">Default border</div>
+<div class="border border-solid border-danger">Error border</div>
+<div class="border border-solid border-success">Valid border</div>
+
+<!-- Palette border color -->
+<div class="border-2 border-solid border-indigo-300">Fixed indigo border</div>
+```
+
+All semantic tokens available: `border-primary`, `border-secondary`, `border-tertiary`, `border-surface`, `border-base`, `border-inverse`, `border-muted`, `border-heading`, `border-body`, `border-subtle`, `border-disabled`, `border-link`, `border-outline`, `border-divider`, `border-ring`, `border-success`, `border-warning`, `border-danger`, `border-info`, `border-accent`.
+
+---
+
+## Border Radius
+
+Round the corners of an element with `rounded` and `rounded-{size}` utilities.
+
+### All Corners
+
+| Class | CSS |
+|-------|-----|
+| `rounded-none` | `border-radius: 0` |
+| `rounded-sm` | `border-radius: 0.125rem` |
+| `rounded` | `border-radius: 0.25rem` |
+| `rounded-md` | `border-radius: 0.375rem` |
+| `rounded-lg` | `border-radius: 0.5rem` |
+| `rounded-xl` | `border-radius: 0.75rem` |
+| `rounded-2xl` | `border-radius: 1rem` |
+| `rounded-3xl` | `border-radius: 1.5rem` |
+| `rounded-full` | `border-radius: 9999px` |
+
+### Per-Side (Two Corners)
+
+Target two corners at once using a side key. Append any size from the table above.
+
+| Class Pattern | Corners Affected |
+|--------------|------------------|
+| `rounded-t-{size}` | `border-top-left-radius`, `border-top-right-radius` |
+| `rounded-b-{size}` | `border-bottom-left-radius`, `border-bottom-right-radius` |
+| `rounded-l-{size}` | `border-top-left-radius`, `border-bottom-left-radius` |
+| `rounded-r-{size}` | `border-top-right-radius`, `border-bottom-right-radius` |
+
+### Per-Corner
+
+Target a single corner by combining both position keys.
+
+| Class Pattern | Corner Affected |
+|--------------|------------------|
+| `rounded-tl-{size}` | `border-top-left-radius` |
+| `rounded-tr-{size}` | `border-top-right-radius` |
+| `rounded-bl-{size}` | `border-bottom-left-radius` |
+| `rounded-br-{size}` | `border-bottom-right-radius` |
+
+```html
+<!-- Fully rounded pill button -->
+<button class="px-4 py-2 rounded-full bg-accent text-white">
+  Pill button
+</button>
+
+<!-- Card with only top corners rounded -->
+<div class="rounded-t-xl overflow-hidden">
+  <img src="cover.jpg" />
+</div>
+
+<!-- Avatar circle -->
+<img src="avatar.png" class="rounded-full w-10 h-10" />
+
+<!-- Input with left side rounded -->
+<div class="flex">
+  <input class="rounded-l-md border px-3 py-2" />
+  <button class="rounded-r-md bg-accent text-white px-4">Go</button>
+</div>
+```

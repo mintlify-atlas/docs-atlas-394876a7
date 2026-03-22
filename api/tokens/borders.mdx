@@ -1,0 +1,30 @@
+---
+title: "Border tokens"
+description: "Border width and border radius token values."
+---
+
+## Border widths (BORDER_WIDTH)
+
+| Key | Value | Class |
+|-----|-------|-------|
+| `` (empty) | 1px | `border` |
+| `0` | 0 | `border-0` |
+| `2` | 2px | `border-2` |
+| `4` | 4px | `border-4` |
+| `8` | 8px | `border-8` |
+
+The bare `border` class (empty key) also sets `border-style: solid` and `border-color: var(--tss-outline)` in addition to `border-width: 1px`.
+
+## Border radius (BORDER_RADIUS)
+
+| Key | Value | Class |
+|-----|-------|-------|
+| `none` | 0 | `rounded-none` |
+| `sm` | 0.125rem | `rounded-sm` |
+| `` (empty) | 0.25rem | `rounded` |
+| `md` | 0.375rem | `rounded-md` |
+| `lg` | 0.5rem | `rounded-lg` |
+| `xl` | 0.75rem | `rounded-xl` |
+| `2xl` | 1rem | `rounded-2xl` |
+| `3xl` | 1.5rem | `rounded-3xl` |
+| `full` | 9999px | `rounded-full` |

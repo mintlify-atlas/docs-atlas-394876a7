@@ -1,0 +1,69 @@
+---
+title: "Introduction"
+description: "TSS is a zero-config runtime utility-first CSS engine that generates styles on the fly — no build step, no PostCSS, no configuration."
+---
+
+## What is TSS?
+
+TSS (Tea Simple Smart CSS) is a utility-first CSS engine that runs entirely in the browser. Instead of generating a stylesheet at build time, TSS parses your HTML class names at runtime and injects the corresponding CSS rules directly into the page.
+
+You write classes like `flex gap-4 text-heading bg-base` and TSS produces the CSS for exactly those classes — nothing more, nothing less.
+
+## How it differs from Tailwind
+
+| | TSS | Tailwind CSS |
+|---|---|---|
+| **Runs at** | Browser runtime | Build time |
+| **Requires PostCSS** | No | Yes |
+| **Requires purge/scan config** | No | Yes |
+| **Works from CDN** | Yes | No |
+| **Handles dynamic classes** | Yes (via MutationObserver) | No |
+| **Bundle size impact** | None | Requires tooling |
+
+Tailwind generates an optimized stylesheet during a build step by scanning your source files. TSS skips that entirely — drop in a script tag and your classes work immediately, including classes added dynamically by JavaScript.
+
+## Who it's for
+
+TSS is a good fit for:
+
+- **Rapid prototyping** — add one script tag and start building without configuring a toolchain
+- **CDN-hosted pages** — static HTML files, CodePen embeds, demos, and documentation examples
+- **Lightweight pages** — marketing pages, landing pages, or internal tools where a full build pipeline is overkill
+- **Dynamic content** — pages where class names are added at runtime by JavaScript (carousels, modals, server-rendered partials)
+
+## Features
+
+<CardGroup cols={2}>
+  <Card title="Zero config" icon="bolt">
+    Drop in a script tag and write utility classes. No `tailwind.config.js`, no PostCSS plugin, no CLI.
+  </Card>
+  <Card title="Auto dark mode" icon="moon">
+    Semantic color tokens automatically switch between light and dark values using `prefers-color-scheme` and an optional `html.dark` class.
+  </Card>
+  <Card title="Runtime generation" icon="gear">
+    CSS rules are parsed and injected on demand. Only the rules you actually use are written to the page.
+  </Card>
+  <Card title="Dynamic content support" icon="arrows-rotate">
+    A `MutationObserver` watches for new elements and class attribute changes, so dynamically added classes are styled immediately.
+  </Card>
+  <Card title="Semantic color system" icon="palette">
+    Named tokens like `bg-base`, `text-heading`, `text-body`, and `bg-accent` map to appropriate light and dark values without any extra configuration.
+  </Card>
+  <Card title="Tailwind-compatible classes" icon="check">
+    Spacing, typography, flexbox, grid, borders, shadows, and more follow Tailwind's class naming conventions so the syntax is familiar.
+  </Card>
+  <Card title="TypeScript support" icon="code">
+    Ships with a `dist/index.d.ts` declaration file covering the public API and the `ParseResult` interface.
+  </Card>
+  <Card title="localStorage theme persistence" icon="floppy-disk">
+    Calling `TSS.toggleDark()` saves the preference to `localStorage` under the key `tss-theme` and restores it on the next page load.
+  </Card>
+</CardGroup>
+
+## Distribution formats
+
+TSS ships three build outputs from the `dist/` directory:
+
+- **`tss.js`** — unminified IIFE for development, exposes a global `TSS` object
+- **`tss.min.js`** — minified IIFE for CDN production use
+- **`tss.esm.js`** — ES module for bundlers such as Vite, Rollup, or esbuild

@@ -1,0 +1,176 @@
+---
+title: "Grid"
+description: "CSS Grid layout utilities."
+---
+
+Grid utilities work in combination with `grid` or `inline-grid` from the [Layout](/utilities/layout#display) display utilities.
+
+---
+
+## Grid Columns
+
+Define how many equal columns a grid container has with `grid-cols-{n}`.
+
+| Class | CSS |
+|-------|-----|
+| `grid-cols-1` | `grid-template-columns: repeat(1, minmax(0, 1fr))` |
+| `grid-cols-2` | `grid-template-columns: repeat(2, minmax(0, 1fr))` |
+| `grid-cols-3` | `grid-template-columns: repeat(3, minmax(0, 1fr))` |
+| `grid-cols-4` | `grid-template-columns: repeat(4, minmax(0, 1fr))` |
+| `grid-cols-5` | `grid-template-columns: repeat(5, minmax(0, 1fr))` |
+| `grid-cols-6` | `grid-template-columns: repeat(6, minmax(0, 1fr))` |
+| `grid-cols-7` | `grid-template-columns: repeat(7, minmax(0, 1fr))` |
+| `grid-cols-8` | `grid-template-columns: repeat(8, minmax(0, 1fr))` |
+| `grid-cols-9` | `grid-template-columns: repeat(9, minmax(0, 1fr))` |
+| `grid-cols-10` | `grid-template-columns: repeat(10, minmax(0, 1fr))` |
+| `grid-cols-11` | `grid-template-columns: repeat(11, minmax(0, 1fr))` |
+| `grid-cols-12` | `grid-template-columns: repeat(12, minmax(0, 1fr))` |
+| `grid-cols-none` | `grid-template-columns: none` |
+
+---
+
+## Grid Rows
+
+Define the number of explicit rows in a grid container with `grid-rows-{n}`.
+
+| Class | CSS |
+|-------|-----|
+| `grid-rows-1` | `grid-template-rows: repeat(1, minmax(0, 1fr))` |
+| `grid-rows-2` | `grid-template-rows: repeat(2, minmax(0, 1fr))` |
+| `grid-rows-3` | `grid-template-rows: repeat(3, minmax(0, 1fr))` |
+| `grid-rows-4` | `grid-template-rows: repeat(4, minmax(0, 1fr))` |
+| `grid-rows-5` | `grid-template-rows: repeat(5, minmax(0, 1fr))` |
+| `grid-rows-6` | `grid-template-rows: repeat(6, minmax(0, 1fr))` |
+| `grid-rows-none` | `grid-template-rows: none` |
+
+---
+
+## Column Span
+
+Control how many columns a grid item spans with `col-span-{n}`.
+
+| Class | CSS |
+|-------|-----|
+| `col-span-1` | `grid-column: span 1 / span 1` |
+| `col-span-2` | `grid-column: span 2 / span 2` |
+| `col-span-3` | `grid-column: span 3 / span 3` |
+| `col-span-4` | `grid-column: span 4 / span 4` |
+| `col-span-5` | `grid-column: span 5 / span 5` |
+| `col-span-6` | `grid-column: span 6 / span 6` |
+| `col-span-7` | `grid-column: span 7 / span 7` |
+| `col-span-8` | `grid-column: span 8 / span 8` |
+| `col-span-9` | `grid-column: span 9 / span 9` |
+| `col-span-10` | `grid-column: span 10 / span 10` |
+| `col-span-11` | `grid-column: span 11 / span 11` |
+| `col-span-12` | `grid-column: span 12 / span 12` |
+| `col-span-full` | `grid-column: 1 / -1` |
+
+---
+
+## Row Span
+
+Control how many rows a grid item spans with `row-span-{n}`.
+
+| Class | CSS |
+|-------|-----|
+| `row-span-1` | `grid-row: span 1 / span 1` |
+| `row-span-2` | `grid-row: span 2 / span 2` |
+| `row-span-3` | `grid-row: span 3 / span 3` |
+| `row-span-4` | `grid-row: span 4 / span 4` |
+| `row-span-5` | `grid-row: span 5 / span 5` |
+| `row-span-6` | `grid-row: span 6 / span 6` |
+| `row-span-full` | `grid-row: 1 / -1` |
+
+---
+
+## Place Items
+
+Control how items are placed along both axes simultaneously.
+
+| Class | CSS |
+|-------|-----|
+| `place-items-start` | `place-items: start` |
+| `place-items-end` | `place-items: end` |
+| `place-items-center` | `place-items: center` |
+| `place-items-stretch` | `place-items: stretch` |
+
+---
+
+## Place Content
+
+Control how content is distributed along both axes in a grid container.
+
+| Class | CSS |
+|-------|-----|
+| `place-content-start` | `place-content: start` |
+| `place-content-end` | `place-content: end` |
+| `place-content-center` | `place-content: center` |
+| `place-content-between` | `place-content: space-between` |
+| `place-content-around` | `place-content: space-around` |
+| `place-content-evenly` | `place-content: space-evenly` |
+| `place-content-stretch` | `place-content: stretch` |
+
+---
+
+## Gap
+
+Control the spacing between grid (and flex) items using the full [spacing scale](/utilities/spacing#spacing-scale).
+
+| Prefix | CSS Property |
+|--------|--------------|
+| `gap-{key}` | `gap` |
+| `gap-x-{key}` | `column-gap` |
+| `gap-y-{key}` | `row-gap` |
+
+```html
+<!-- Uniform gap -->
+<div class="grid grid-cols-3 gap-4">
+  <div>Cell</div>
+  <div>Cell</div>
+  <div>Cell</div>
+</div>
+
+<!-- Different horizontal and vertical gaps -->
+<div class="grid grid-cols-4 gap-x-6 gap-y-4">
+  <div>Cell</div>
+  <div>Cell</div>
+  <div>Cell</div>
+  <div>Cell</div>
+</div>
+```
+
+---
+
+## Common Patterns
+
+```html
+<!-- Responsive 3-column card grid -->
+<div class="grid grid-cols-3 gap-6">
+  <div class="bg-surface rounded-xl p-4 shadow">Card</div>
+  <div class="bg-surface rounded-xl p-4 shadow">Card</div>
+  <div class="bg-surface rounded-xl p-4 shadow">Card</div>
+</div>
+
+<!-- 12-column layout with spanning regions -->
+<div class="grid grid-cols-12 gap-4">
+  <aside class="col-span-3 bg-secondary rounded-lg p-4">Sidebar</aside>
+  <main class="col-span-9 bg-surface rounded-lg p-4">Main content</main>
+</div>
+
+<!-- Full-width header spanning all columns -->
+<div class="grid grid-cols-3 gap-4">
+  <header class="col-span-full bg-primary p-4">Full-width header</header>
+  <div>Col 1</div>
+  <div>Col 2</div>
+  <div>Col 3</div>
+</div>
+
+<!-- Centered tile using place-items -->
+<div class="grid grid-cols-3 place-items-center h-48">
+  <div>Centered tile</div>
+</div>
+```
+
+<Tip>
+  `gap-{key}` works on both grid and flex containers. No need to switch utilities when toggling between the two display modes.
+</Tip>

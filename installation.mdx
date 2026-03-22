@@ -1,0 +1,102 @@
+---
+title: "Installation"
+description: "Add TSS to any project — via CDN script tag or npm package."
+---
+
+## CDN (script tag)
+
+The fastest way to use TSS is to load it from a CDN. Add the script tag to the `<head>` of your HTML file.
+
+```html
+<!-- jsDelivr (recommended) -->
+<script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css/dist/tss.min.js"></script>
+
+<!-- unpkg -->
+<script src="https://unpkg.com/tea-simple-smart-css/dist/tss.min.js"></script>
+```
+
+<Note>
+  TSS auto-initializes on `DOMContentLoaded`. You do not need to call any setup function — simply include the script and start using utility classes.
+</Note>
+
+### CDN setup flow
+
+<Steps>
+  <Step title="Add the script tag">
+    Place the `<script>` tag inside the `<head>` element of your HTML file:
+
+    ```html
+    <head>
+      <meta charset="UTF-8">
+      <title>My Page</title>
+      <script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css/dist/tss.min.js"></script>
+    </head>
+    ```
+  </Step>
+  <Step title="Add utility classes to your HTML">
+    Write TSS utility classes directly on your elements:
+
+    ```html
+    <body class="bg-base p-8">
+      <h1 class="text-4xl font-bold text-heading">Hello, TSS</h1>
+      <p class="text-base text-body mt-4">No build step needed.</p>
+    </body>
+    ```
+  </Step>
+  <Step title="Open the page">
+    Open the file in a browser. TSS scans the DOM on load, generates CSS rules for every class it finds, and injects them into a `<style id="tss-utilities">` element in `<head>`. Your styles are applied.
+  </Step>
+</Steps>
+
+## npm install
+
+Install TSS as a package dependency when using a bundler:
+
+<CodeGroup>
+
+```bash npm
+npm install tea-simple-smart-css
+```
+
+```bash yarn
+yarn add tea-simple-smart-css
+```
+
+```bash pnpm
+pnpm add tea-simple-smart-css
+```
+
+```bash bun
+bun add tea-simple-smart-css
+```
+
+</CodeGroup>
+
+## ES module import
+
+After installing via npm, import the public API from the package:
+
+```javascript
+import { version, refresh, toggleDark, parse } from 'tea-simple-smart-css';
+```
+
+The named exports are:
+
+| Export | Type | Description |
+|---|---|---|
+| `version` | `string` | The current TSS version number |
+| `refresh()` | `() => void` | Rescans the DOM and flushes pending CSS rules |
+| `toggleDark()` | `() => boolean` | Toggles dark mode and returns the new dark state |
+| `parse(className)` | `(string) => ParseResult \| null` | Parses a single class name into a `{ selector, rules }` object |
+
+## Build files
+
+The `dist/` directory contains three output files:
+
+| File | Format | Global | Use case |
+|---|---|---|---|
+| `dist/tss.js` | IIFE | `TSS` | Development |
+| `dist/tss.min.js` | IIFE minified | `TSS` | CDN production |
+| `dist/tss.esm.js` | ES module | — | Bundlers |
+
+The IIFE builds expose a global `TSS` object in the browser. The ESM build exports named functions for use with bundlers and does not set a global.

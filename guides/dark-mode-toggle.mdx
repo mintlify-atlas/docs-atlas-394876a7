@@ -1,0 +1,120 @@
+---
+title: "Dark mode toggle"
+description: "Implement a theme switcher that persists the user's preference across sessions."
+---
+
+TSS has built-in dark mode support. The active theme is stored in `localStorage` under the key `tss-theme` and restored automatically on every page load.
+
+## How toggleDark() works
+
+`toggleDark()` reads the current state from `html.classList`, flips the class, persists the new value to `localStorage`, and returns the new boolean state:
+
+```javascript
+function toggleDark() {
+  const html = document.documentElement;
+  const isDark = html.classList.contains('dark');
+
+  if (isDark) {
+    html.classList.remove('dark');
+    html.classList.add('light');
+  } else {
+    html.classList.remove('light');
+    html.classList.add('dark');
+  }
+
+  try {
+    localStorage.setItem('tss-theme', isDark ? 'light' : 'dark');
+  } catch (e) { }
+
+  return !isDark;
+}
+```
+
+Returns `true` when dark mode is now **active**, `false` when light mode is active.
+
+## Basic button (CDN)
+
+```html
+<button
+  id="theme-toggle"
+  onclick="TSS.toggleDark()"
+  class="cursor-pointer px-4 py-2 bg-secondary text-body rounded-lg border border-outline transition-colors"
+>
+  Toggle Theme
+</button>
+```
+
+## Button with icon feedback
+
+```html
+<button id="theme-toggle" class="cursor-pointer px-4 py-2 rounded-lg bg-secondary text-body border border-outline">
+  🌙 Dark
+</button>
+
+<script>
+  document.getElementById('theme-toggle').addEventListener('click', function () {
+    var isDark = TSS.toggleDark();
+    this.textContent = isDark ? '☀️ Light' : '🌙 Dark';
+  });
+</script>
+```
+
+## ESM import
+
+```javascript
+import { toggleDark } from 'tea-simple-smart-css';
+
+document.querySelector('[data-theme-toggle]').addEventListener('click', () => {
+  const isDark = toggleDark();
+  updateIcon(isDark);
+});
+```
+
+## Manual class control
+
+You can directly set `document.documentElement.classList` when you want a specific theme instead of toggling:
+
+```javascript
+// Force dark mode
+document.documentElement.classList.add('dark');
+document.documentElement.classList.remove('light');
+
+// Force light mode
+document.documentElement.classList.add('light');
+document.documentElement.classList.remove('dark');
+
+// Remove manual override — fall back to prefers-color-scheme
+document.documentElement.classList.remove('dark');
+document.documentElement.classList.remove('light');
+```
+
+<Note>
+Manual class manipulation does **not** persist to `localStorage`. The preference will not be restored after a page reload. Use `toggleDark()` for persistent theme switching.
+</Note>
+
+## Detecting the current theme
+
+```javascript
+// Read current theme state
+const isDark  = document.documentElement.classList.contains('dark');
+const isLight = document.documentElement.classList.contains('light');
+
+// Check system preference independently
+const prefersSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+// React to system preference changes
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+  if (!localStorage.getItem('tss-theme')) {
+    // No manual override stored — system change takes effect automatically
+    console.log('System switched to', e.matches ? 'dark' : 'light');
+  }
+});
+```
+
+## Theme priority
+
+| Priority | Source | Description |
+|----------|--------|-------------|
+| 1 (highest) | `html.dark` / `html.light` class | Manual override via `toggleDark()` or direct manipulation |
+| 2 | `prefers-color-scheme` media query | System-level preference |
+| 3 (lowest) | `:root` defaults | Light mode — always-on baseline |

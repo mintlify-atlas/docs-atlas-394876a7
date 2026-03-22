@@ -1,0 +1,133 @@
+---
+title: "Layout"
+description: "Display, position, overflow, and z-index utilities."
+---
+
+## Display
+
+Control the `display` property of an element.
+
+| Class | CSS |
+|-------|-----|
+| `block` | `display: block` |
+| `inline-block` | `display: inline-block` |
+| `inline` | `display: inline` |
+| `flex` | `display: flex` |
+| `inline-flex` | `display: inline-flex` |
+| `grid` | `display: grid` |
+| `inline-grid` | `display: inline-grid` |
+| `hidden` | `display: none` |
+| `table` | `display: table` |
+| `table-row` | `display: table-row` |
+| `table-cell` | `display: table-cell` |
+| `contents` | `display: contents` |
+
+```html
+<div class="flex items-center gap-4">
+  <span class="inline-block">Label</span>
+  <div class="hidden">Not visible</div>
+  <span class="contents">Transparent wrapper</span>
+</div>
+```
+
+<Note>
+  `hidden` maps to `display: none`, which removes the element from the layout entirely. Use `opacity-0` or `invisible` if you want to hide it while preserving space.
+</Note>
+
+---
+
+## Position
+
+Control the `position` property of an element.
+
+| Class | CSS |
+|-------|-----|
+| `static` | `position: static` |
+| `fixed` | `position: fixed` |
+| `absolute` | `position: absolute` |
+| `relative` | `position: relative` |
+| `sticky` | `position: sticky` |
+
+```html
+<!-- Absolutely positioned badge on a relative parent -->
+<div class="relative">
+  <img src="avatar.png" />
+  <span class="absolute">99+</span>
+</div>
+
+<!-- Sticky header -->
+<header class="sticky top-0 bg-surface z-10">
+  Navigation
+</header>
+```
+
+---
+
+## Overflow
+
+Control how content that overflows its container is handled.
+
+| Class | CSS |
+|-------|-----|
+| `overflow-auto` | `overflow: auto` |
+| `overflow-hidden` | `overflow: hidden` |
+| `overflow-clip` | `overflow: clip` |
+| `overflow-visible` | `overflow: visible` |
+| `overflow-scroll` | `overflow: scroll` |
+| `overflow-x-auto` | `overflow-x: auto` |
+| `overflow-x-hidden` | `overflow-x: hidden` |
+| `overflow-x-clip` | `overflow-x: clip` |
+| `overflow-x-visible` | `overflow-x: visible` |
+| `overflow-x-scroll` | `overflow-x: scroll` |
+| `overflow-y-auto` | `overflow-y: auto` |
+| `overflow-y-hidden` | `overflow-y: hidden` |
+| `overflow-y-clip` | `overflow-y: clip` |
+| `overflow-y-visible` | `overflow-y: visible` |
+| `overflow-y-scroll` | `overflow-y: scroll` |
+
+```html
+<!-- Scrollable container with fixed height -->
+<div class="h-64 overflow-y-auto">
+  <p>Long content...</p>
+</div>
+
+<!-- Hide horizontal overflow on a carousel -->
+<div class="overflow-x-hidden">
+  <div class="flex gap-4">
+    <!-- slides -->
+  </div>
+</div>
+```
+
+---
+
+## Z-Index
+
+Control the stacking order of an element with the `z-index` property.
+
+| Class | CSS |
+|-------|-----|
+| `z-0` | `z-index: 0` |
+| `z-10` | `z-index: 10` |
+| `z-20` | `z-index: 20` |
+| `z-30` | `z-index: 30` |
+| `z-40` | `z-index: 40` |
+| `z-50` | `z-index: 50` |
+| `z-auto` | `z-index: auto` |
+
+```html
+<!-- Modal overlay on top of all content -->
+<div class="fixed inset-0 z-50 bg-black opacity-50"></div>
+<div class="fixed z-50 top-1/2 left-1/2 bg-surface p-6 rounded-lg">
+  Modal content
+</div>
+
+<!-- Sticky nav below a potential fixed banner -->
+<nav class="sticky top-0 z-40">
+  Navigation
+</nav>
+```
+
+<Tip>
+  Z-index only works on positioned elements (`relative`, `absolute`, `fixed`, or `sticky`). Pair `z-{n}` with a position class.
+</Tip>

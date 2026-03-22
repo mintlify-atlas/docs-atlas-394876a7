@@ -1,0 +1,138 @@
+---
+title: "Colors"
+description: "Background and text color utilities using TSS color system."
+---
+
+TSS provides two layers of color utilities: **semantic tokens** that adapt to light/dark mode automatically, and **palette colors** for direct hex values.
+
+---
+
+## Semantic Colors
+
+Semantic color classes reference CSS custom properties (`--tss-{token}`) that are automatically swapped between light and dark mode. Prefer semantic colors for UI components to support theming.
+
+### Background
+
+| Class | CSS Variable |
+|-------|-------------|
+| `bg-primary` | `var(--tss-primary)` |
+| `bg-secondary` | `var(--tss-secondary)` |
+| `bg-tertiary` | `var(--tss-tertiary)` |
+| `bg-surface` | `var(--tss-surface)` |
+| `bg-base` | `var(--tss-base)` |
+| `bg-inverse` | `var(--tss-inverse)` |
+| `bg-muted` | `var(--tss-muted)` |
+| `bg-heading` | `var(--tss-heading)` |
+| `bg-body` | `var(--tss-body)` |
+| `bg-subtle` | `var(--tss-subtle)` |
+| `bg-disabled` | `var(--tss-disabled)` |
+| `bg-link` | `var(--tss-link)` |
+| `bg-outline` | `var(--tss-outline)` |
+| `bg-divider` | `var(--tss-divider)` |
+| `bg-ring` | `var(--tss-ring)` |
+| `bg-success` | `var(--tss-success)` |
+| `bg-warning` | `var(--tss-warning)` |
+| `bg-danger` | `var(--tss-danger)` |
+| `bg-info` | `var(--tss-info)` |
+| `bg-accent` | `var(--tss-accent)` |
+
+### Text
+
+| Class | CSS Variable |
+|-------|-------------|
+| `text-primary` | `var(--tss-primary)` |
+| `text-secondary` | `var(--tss-secondary)` |
+| `text-tertiary` | `var(--tss-tertiary)` |
+| `text-surface` | `var(--tss-surface)` |
+| `text-base` | `var(--tss-base)` |
+| `text-inverse` | `var(--tss-inverse)` |
+| `text-muted` | `var(--tss-muted)` |
+| `text-heading` | `var(--tss-heading)` |
+| `text-body` | `var(--tss-body)` |
+| `text-subtle` | `var(--tss-subtle)` |
+| `text-disabled` | `var(--tss-disabled)` |
+| `text-link` | `var(--tss-link)` |
+| `text-outline` | `var(--tss-outline)` |
+| `text-divider` | `var(--tss-divider)` |
+| `text-ring` | `var(--tss-ring)` |
+| `text-success` | `var(--tss-success)` |
+| `text-warning` | `var(--tss-warning)` |
+| `text-danger` | `var(--tss-danger)` |
+| `text-info` | `var(--tss-info)` |
+| `text-accent` | `var(--tss-accent)` |
+
+---
+
+## Palette Colors
+
+Palette utilities provide direct access to specific hex values. The naming pattern is:
+
+- Background: `bg-{color}-{shade}`
+- Text: `text-{color}-{shade}`
+
+**Available colors:** `slate`, `gray`, `zinc`, `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `pink`, `rose`
+
+**Available shades:** `50`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900`, `950`
+
+```html
+<!-- Palette backgrounds -->
+<div class="bg-blue-500">Blue 500 background</div>
+<div class="bg-emerald-100">Light emerald background</div>
+<div class="bg-rose-950">Very dark rose background</div>
+
+<!-- Palette text colors -->
+<p class="text-gray-700">Dark gray text</p>
+<p class="text-indigo-600">Indigo text</p>
+```
+
+<Note>
+  Palette colors do not adapt to light/dark mode. Use semantic tokens when building themeable components.
+</Note>
+
+---
+
+## Special Values
+
+| Class | CSS Value |
+|-------|----------|
+| `bg-white` | `#ffffff` |
+| `bg-black` | `#000000` |
+| `bg-transparent` | `transparent` |
+| `text-white` | `#ffffff` |
+| `text-black` | `#000000` |
+| `text-transparent` | `transparent` |
+| `text-inherit` | `inherit` |
+| `text-current` | `currentColor` |
+
+```html
+<!-- Transparent overlay -->
+<div class="bg-transparent">No background</div>
+
+<!-- Inherit text color from parent -->
+<span class="text-inherit">Same color as parent</span>
+
+<!-- Use the current text color for SVG fill -->
+<svg class="text-current">...</svg>
+```
+
+---
+
+## Semantic vs Palette
+
+```html
+<!-- Semantic: adapts to light/dark mode automatically -->
+<div class="bg-surface">
+  <p class="text-heading">Adaptive heading</p>
+  <p class="text-body">Adaptive body text</p>
+  <span class="text-subtle">Muted label</span>
+</div>
+
+<!-- Palette: fixed hex value regardless of theme -->
+<div class="bg-indigo-600">
+  <p class="text-white">Always white on always indigo</p>
+</div>
+```
+
+<Tip>
+  For most UI components — cards, forms, modals, navigation — use semantic colors. Reserve palette colors for illustrations, data visualizations, or branded elements that should not shift with the theme.
+</Tip>

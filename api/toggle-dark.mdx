@@ -1,0 +1,77 @@
+---
+title: toggleDark()
+description: Toggle between light and dark mode and persist the preference.
+---
+
+## Signature
+
+```typescript
+toggleDark(): boolean
+```
+
+| | |
+|---|---|
+| **CDN** | `TSS.toggleDark()` |
+| **ESM** | `import { toggleDark } from 'tea-simple-smart-css'` |
+
+## Returns
+
+<ResponseField name="isDark" type="boolean" required>
+  `true` when dark mode is now active; `false` when light mode is active.
+</ResponseField>
+
+## Side effects
+
+- Adds or removes the `dark` / `light` class on `document.documentElement`.
+- Saves the preference to `localStorage` under the key `tss-theme`.
+
+<Note>
+  `localStorage` access is wrapped in `try/catch` to handle restricted contexts (e.g., sandboxed iframes, private browsing with storage blocked).
+</Note>
+
+## Source
+
+```javascript
+function toggleDark() {
+  const html = document.documentElement;
+  const isDark = html.classList.contains('dark');
+
+  if (isDark) {
+    html.classList.remove('dark');
+    html.classList.add('light');
+  } else {
+    html.classList.remove('light');
+    html.classList.add('dark');
+  }
+
+  try {
+    localStorage.setItem('tss-theme', isDark ? 'light' : 'dark');
+  } catch (e) { }
+
+  return !isDark;
+}
+```
+
+## Usage
+
+<CodeGroup>
+
+```javascript CDN
+// Simple toggle
+const isDark = TSS.toggleDark();
+console.log(isDark); // true = dark mode active
+
+// Update UI based on new state
+const isDark = TSS.toggleDark();
+document.getElementById('icon').textContent = isDark ? '☀️' : '🌙';
+```
+
+```javascript ESM
+import { toggleDark } from 'tea-simple-smart-css';
+
+document.querySelector('#theme-btn').addEventListener('click', () => {
+  toggleDark();
+});
+```
+
+</CodeGroup>

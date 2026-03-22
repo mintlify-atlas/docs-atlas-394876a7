@@ -1,0 +1,63 @@
+---
+title: "Color tokens"
+description: "The TSS color palette and semantic color system."
+---
+
+## Semantic color tokens
+
+The `SEMANTIC_COLORS` export maps named tokens to CSS custom properties. Each token resolves to a different value in light and dark mode.
+
+| Token | CSS Variable | Light value | Dark value |
+|-------|-------------|-------------|------------|
+| `primary` | `--tss-primary` | #ffffff | #09090b |
+| `secondary` | `--tss-secondary` | #f3f4f6 | #18181b |
+| `tertiary` | `--tss-tertiary` | #e5e7eb | #27272a |
+| `surface` | `--tss-surface` | #ffffff | #18181b |
+| `base` | `--tss-base` | #f9fafb | #09090b |
+| `inverse` | `--tss-inverse` | #111827 | #f9fafb |
+| `muted` | `--tss-muted` | #f3f4f6 | #27272a |
+| `heading` | `--tss-heading` | #111827 | #f9fafb |
+| `body` | `--tss-body` | #374151 | #d1d5db |
+| `subtle` | `--tss-subtle` | #6b7280 | #9ca3af |
+| `disabled` | `--tss-disabled` | #9ca3af | #52525b |
+| `link` | `--tss-link` | #2563eb | #60a5fa |
+| `outline` | `--tss-outline` | #e5e7eb | #3f3f46 |
+| `divider` | `--tss-divider` | #e5e7eb | #27272a |
+| `ring` | `--tss-ring` | #3b82f6 | #60a5fa |
+| `success` | `--tss-success` | #16a34a | #4ade80 |
+| `warning` | `--tss-warning` | #f59e0b | #fbbf24 |
+| `danger` | `--tss-danger` | #dc2626 | #f87171 |
+| `info` | `--tss-info` | #2563eb | #60a5fa |
+| `accent` | `--tss-accent` | #4f46e5 | #818cf8 |
+
+## Palette colors
+
+The `PALETTE` export provides the full color scale. Tokens follow the naming pattern `{color}-{shade}`. The 19 available color names are: `slate`, `gray`, `zinc`, `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `pink`, `rose`. Each color exposes shades: `50`, `100`, `200`, `300`, `400`, `500`, `600`, `700`, `800`, `900`, `950`.
+
+Example rows from `blue` and `gray`:
+
+| Token | Value |
+|-------|-------|
+| `blue-50` | #eff6ff |
+| `blue-100` | #dbeafe |
+| `blue-400` | #60a5fa |
+| `blue-500` | #3b82f6 |
+| `blue-600` | #2563eb |
+| `blue-900` | #1e3a8a |
+| `gray-50` | #f9fafb |
+| `gray-300` | #d1d5db |
+| `gray-500` | #6b7280 |
+| `gray-700` | #374151 |
+| `gray-900` | #111827 |
+
+## Special values
+
+In addition to the color scale, `PALETTE` exports the following special values:
+
+| Token | Value |
+|-------|-------|
+| `white` | #ffffff |
+| `black` | #000000 |
+| `transparent` | `transparent` |
+| `inherit` | `inherit` |
+| `current` | `currentColor` |

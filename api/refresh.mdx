@@ -1,0 +1,60 @@
+---
+title: refresh()
+description: Re-scan the DOM and flush any pending CSS rules.
+---
+
+## Signature
+
+```typescript
+refresh(): void
+```
+
+| | |
+|---|---|
+| **CDN** | `TSS.refresh()` |
+| **ESM** | `import { refresh } from 'tea-simple-smart-css'` |
+
+## Returns
+
+`void`
+
+## Source
+
+```javascript
+function refresh() {
+  scanNode(document.body);
+  flushPending();
+}
+```
+
+## When to use
+
+TSS already handles dynamic content via `MutationObserver`, which covers most cases including appended nodes and `class` attribute changes. You rarely need to call `refresh()` manually.
+
+Call `refresh()` explicitly when:
+
+- You have injected large amounts of HTML via `innerHTML` and the `MutationObserver` may not have fired yet.
+- You are hydrating server-side rendered markup and want to guarantee all server-rendered classes are processed immediately.
+
+<Tip>
+  If you find yourself calling `refresh()` frequently, consider whether the `MutationObserver` is sufficient for your use case. In most single-page app frameworks it will be.
+</Tip>
+
+## Usage
+
+<CodeGroup>
+
+```javascript CDN
+// After bulk innerHTML replacement
+container.innerHTML = serverRenderedHTML;
+TSS.refresh();
+```
+
+```javascript ESM
+import { refresh } from 'tea-simple-smart-css';
+
+container.innerHTML = newContent;
+refresh();
+```
+
+</CodeGroup>

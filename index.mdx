@@ -1,97 +1,99 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "TSS — Tea Simple Smart CSS"
+description: "A zero-config, lightweight utility-first CSS engine with automatic light/dark mode. Drop in a single script tag and start styling with semantic utility classes."
 ---
 
-## Setting up
-
-Get your documentation site up and running in minutes.
-
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
-
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={2}>
+  <Card title="Get Started" icon="rocket" href="/introduction">
+    Learn what TSS is and why it's different from other CSS frameworks.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Installation" icon="download" href="/installation">
+    Add TSS via CDN or install it as an npm package.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Quickstart" icon="bolt" href="/quickstart">
+    Build your first page with TSS in under 5 minutes.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
+  <Card title="API Reference" icon="code" href="/api/overview">
+    Explore the full JavaScript API and design token reference.
   </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## What is TSS?
 
-Everything you need to create world-class documentation.
+TSS (Tea Simple Smart CSS) is a runtime utility-first CSS engine. Unlike Tailwind CSS, which requires a build step to generate a stylesheet, TSS runs entirely in the browser — scanning your HTML, generating only the CSS rules you actually use, and injecting them into the page automatically.
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+```html
+<!-- Drop in one script tag — no build step, no config file -->
+<script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css/dist/tss.min.js"></script>
 
-## Need inspiration?
+<!-- Now use utility classes directly in your HTML -->
+<div class="flex flex-col gap-4 p-8 bg-surface rounded-lg shadow-md">
+  <h1 class="text-3xl font-bold text-heading">Hello, TSS!</h1>
+  <p class="text-base text-body">Styled automatically, with light/dark mode built in.</p>
+</div>
+```
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+## Key Features
+
+<CardGroup cols={3}>
+  <Card title="Zero Config" icon="circle-check">
+    No config files, no PostCSS plugins, no build pipeline. Just a single script tag.
+  </Card>
+  <Card title="Auto Light/Dark Mode" icon="moon">
+    Semantic color tokens automatically switch between light and dark themes using `prefers-color-scheme`.
+  </Card>
+  <Card title="Runtime Generation" icon="bolt">
+    CSS is generated on-demand — only rules for classes actually used in the DOM are created.
+  </Card>
+  <Card title="Dynamic Content" icon="rotate">
+    A MutationObserver watches the DOM so dynamically added elements are styled immediately.
+  </Card>
+  <Card title="Tailwind-Compatible" icon="layer-group">
+    Familiar class naming convention — `p-4`, `text-lg`, `flex`, `bg-blue-500` all work as expected.
+  </Card>
+  <Card title="Semantic Tokens" icon="palette">
+    Named semantic colors like `bg-surface`, `text-heading`, `border-outline` adapt automatically to the active theme.
+  </Card>
+</CardGroup>
+
+## How it works
+
+<Steps>
+  <Step title="Script loads">
+    TSS auto-initializes on `DOMContentLoaded`, injecting two `<style>` tags: one for CSS custom properties (the theme) and one for utility rules.
+  </Step>
+  <Step title="DOM scan">
+    TSS scans every element's class list and parses each utility class name into a CSS declaration block.
+  </Step>
+  <Step title="CSS injection">
+    Generated rules are batched via `requestAnimationFrame` and flushed into the utilities `<style>` tag for optimal performance.
+  </Step>
+  <Step title="Live observation">
+    A `MutationObserver` watches for new elements and class attribute changes, so dynamic content is styled automatically.
+  </Step>
+</Steps>
+
+## Light/Dark mode at a glance
+
+TSS generates CSS custom properties for all semantic color tokens and exposes them at `:root`. Dark mode is driven by `prefers-color-scheme` automatically, and you can override it programmatically:
+
+```javascript
+// Toggle dark mode manually and persist to localStorage
+TSS.toggleDark();
+
+// Check the current version
+console.log(TSS.version);
+```
+
+<Note>
+  Theme preference is persisted to `localStorage` under the key `tss-theme` and restored on every page load.
+</Note>
+
+## Package builds
+
+| Build | File | Use case |
+|-------|------|----------|
+| IIFE (unminified) | `dist/tss.js` | Development, debugging |
+| IIFE (minified) | `dist/tss.min.js` | CDN / `<script>` tag in production |
+| ES Module | `dist/tss.esm.js` | Bundlers (Vite, Webpack, Rollup) |
+| TypeScript | `dist/index.d.ts` | Type-safe imports |

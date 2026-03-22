@@ -1,0 +1,91 @@
+---
+title: parse()
+description: Parse a TSS utility class name into its CSS selector and rules.
+---
+
+## Signature
+
+```typescript
+parse(className: string): ParseResult | null
+```
+
+`parse` is also exported internally as `parseClass` — they are the same function.
+
+| | |
+|---|---|
+| **CDN** | `TSS.parse(className)` |
+| **ESM** | `import { parse } from 'tea-simple-smart-css'` |
+
+## Parameters
+
+<ParamField path="className" type="string" required>
+  A single utility class name to parse. Pass one class at a time (e.g., `'flex'`, `'p-4'`, `'text-heading'`). Do not pass multiple space-separated classes.
+</ParamField>
+
+## Returns
+
+<ResponseField name="result" type="ParseResult | null">
+  Returns `null` if the class name is not recognized by TSS. Otherwise returns a `ParseResult` object.
+
+  <Expandable title="ParseResult properties">
+    <ResponseField name="selector" type="string" required>
+      The CSS selector for this class, including the leading dot. Special characters such as `/` are escaped (e.g., `w-1/2` → `.w-1\/2`).
+    </ResponseField>
+    <ResponseField name="rules" type="Record<string, string>" required>
+      A map of CSS property names to their values (e.g., `{ display: 'flex' }`).
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### ParseResult type
+
+```typescript
+interface ParseResult {
+  selector: string;        // CSS selector, e.g. ".flex" or ".p-4"
+  rules: Record<string, string>; // CSS property → value map
+}
+```
+
+## Examples
+
+```javascript
+TSS.parse('flex');
+// { selector: '.flex', rules: { display: 'flex' } }
+
+TSS.parse('p-4');
+// { selector: '.p-4', rules: { padding: '1rem' } }
+
+TSS.parse('text-heading');
+// { selector: '.text-heading', rules: { color: 'var(--tss-heading)' } }
+
+TSS.parse('bg-blue-500');
+// { selector: '.bg-blue-500', rules: { 'background-color': '#3b82f6' } }
+
+TSS.parse('w-1/2');
+// { selector: '.w-1\\/2', rules: { width: '50%' } }
+
+TSS.parse('not-a-class');
+// null
+```
+
+<Note>
+  Special characters in class names (such as `/` in fractional widths) are escaped in the returned `selector`. For example, `w-1/2` produces the selector `.w-1\/2`.
+</Note>
+
+## Use cases
+
+- **Debugging** — inspect exactly what CSS a given class name produces before applying it.
+- **Testing** — verify that specific class names parse to the expected CSS declarations.
+- **Tooling** — build class name intellisense, validators, or static analysis tools on top of the TSS parser.
+
+## ESM usage
+
+```javascript
+import { parse } from 'tea-simple-smart-css';
+
+const result = parse('shadow-lg');
+if (result) {
+  console.log(result.rules);
+  // { 'box-shadow': '0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)' }
+}
+```

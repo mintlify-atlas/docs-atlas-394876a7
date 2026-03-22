@@ -1,0 +1,82 @@
+---
+title: Semantic colors
+description: TSS's adaptive color system — named roles that automatically resolve to the correct light or dark value without any configuration.
+---
+
+## What are semantic colors?
+
+Raw palette colors like `text-gray-900` are static — they always resolve to a specific hex value, regardless of whether the page is in light or dark mode. Semantic colors are different: they are **named roles** that map to the right color for the current theme automatically.
+
+For example:
+
+| Class | Light mode | Dark mode |
+|---|---|---|
+| `text-gray-900` | `#111827` | `#111827` (unchanged) |
+| `text-heading` | `#111827` | `#f9fafb` |
+
+Using `text-heading` instead of `text-gray-900` means your text is legible on both light and dark backgrounds without writing any media queries or conditional classes.
+
+<Note>
+  Raw palette colors (e.g., `text-gray-900`, `bg-blue-500`) do **not** adapt to dark mode. Only semantic tokens resolve dynamically.
+</Note>
+
+## The full semantic color system
+
+All tokens are defined in `SEMANTIC_COLORS` in `tokens.js`.
+
+| Token | Light value | Dark value | Typical use |
+|---|---|---|---|
+| `primary` | `#ffffff` | `#09090b` | Primary surface or foreground contrast |
+| `secondary` | `#f3f4f6` | `#18181b` | Secondary backgrounds, sidebar fills |
+| `tertiary` | `#e5e7eb` | `#27272a` | Tertiary panels, nested containers |
+| `surface` | `#ffffff` | `#18181b` | Card and modal backgrounds |
+| `base` | `#f9fafb` | `#09090b` | Page background (`body`) |
+| `inverse` | `#111827` | `#f9fafb` | Inverted text or icon on dark/light surfaces |
+| `muted` | `#f3f4f6` | `#27272a` | Muted, low-emphasis backgrounds |
+| `heading` | `#111827` | `#f9fafb` | Page and section headings |
+| `body` | `#374151` | `#d1d5db` | Body copy, paragraph text |
+| `subtle` | `#6b7280` | `#9ca3af` | Captions, timestamps, secondary labels |
+| `disabled` | `#9ca3af` | `#52525b` | Disabled inputs, placeholder text |
+| `link` | `#2563eb` | `#60a5fa` | Hyperlinks and interactive text |
+| `outline` | `#e5e7eb` | `#3f3f46` | Border and outline strokes |
+| `divider` | `#e5e7eb` | `#27272a` | Horizontal rules, separator lines |
+| `ring` | `#3b82f6` | `#60a5fa` | Focus rings, keyboard navigation indicators |
+| `success` | `#16a34a` | `#4ade80` | Positive status, confirmation messages |
+| `warning` | `#f59e0b` | `#fbbf24` | Caution states, advisory messages |
+| `danger` | `#dc2626` | `#f87171` | Error states, destructive actions |
+| `info` | `#2563eb` | `#60a5fa` | Informational callouts and badges |
+| `accent` | `#4f46e5` | `#818cf8` | Brand accent, highlighted interactive elements |
+
+## Usage patterns
+
+Semantic color tokens are available as background (`bg-*`), text (`text-*`), and border (`border-*`) classes — the same syntax as palette colors.
+
+```html
+<!-- Theme-aware card -->
+<div class="bg-surface border border-outline rounded-lg p-4">
+  <h2 class="text-heading font-semibold">Card Title</h2>
+  <p class="text-body">Card content that adapts to dark mode.</p>
+  <span class="text-subtle text-sm">Meta information</span>
+</div>
+
+<!-- Status indicators -->
+<div class="bg-success text-primary px-3 py-1 rounded-full text-sm">Success</div>
+<div class="bg-danger text-primary px-3 py-1 rounded-full text-sm">Error</div>
+<div class="bg-warning text-primary px-3 py-1 rounded-full text-sm">Warning</div>
+```
+
+The same card will display `#ffffff` surface with `#111827` heading text in light mode, and automatically switch to `#18181b` surface with `#f9fafb` heading text in dark mode — with no additional markup.
+
+## How CSS custom properties work
+
+Every semantic color class resolves through a CSS custom property rather than a static value. When `parseClass('bg-surface')` is called, `resolveColor('surface')` detects it as a semantic token and returns `var(--tss-surface)`. The generated rule looks like:
+
+```css
+.bg-surface {
+  background-color: var(--tss-surface);
+}
+```
+
+The actual color — `#ffffff` in light mode or `#18181b` in dark mode — is controlled entirely by which CSS custom property value is active on `:root` or `html.dark`/`html.light`. Changing the theme swaps the variable values; the utility class rule itself never changes.
+
+This means theme switching is instantaneous and involves no DOM class toggling on individual elements — only the single class on `<html>` changes.

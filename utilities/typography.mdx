@@ -1,0 +1,159 @@
+---
+title: "Typography"
+description: "Font size, weight, alignment, and text decoration utilities."
+---
+
+## Font Size
+
+Control the `font-size` and `line-height` of text with `text-{size}` utilities.
+
+| Class | `font-size` | `line-height` |
+|-------|------------|---------------|
+| `text-xs` | `0.75rem` | `1rem` |
+| `text-sm` | `0.875rem` | `1.25rem` |
+| `text-base` | `1rem` | `1.5rem` |
+| `text-lg` | `1.125rem` | `1.75rem` |
+| `text-xl` | `1.25rem` | `1.75rem` |
+| `text-2xl` | `1.5rem` | `2rem` |
+| `text-3xl` | `1.875rem` | `2.25rem` |
+| `text-4xl` | `2.25rem` | `2.5rem` |
+| `text-5xl` | `3rem` | `1` |
+| `text-6xl` | `3.75rem` | `1` |
+| `text-7xl` | `4.5rem` | `1` |
+| `text-8xl` | `6rem` | `1` |
+| `text-9xl` | `8rem` | `1` |
+
+```html
+<p class="text-sm text-subtle">Helper text</p>
+<h2 class="text-2xl font-bold">Section title</h2>
+<h1 class="text-4xl font-black">Hero headline</h1>
+```
+
+<Note>
+  Sizes `5xl` and above use a `line-height` of `1` (unitless), meaning the line height equals the font size — appropriate for large display headings.
+</Note>
+
+---
+
+## Font Weight
+
+Control the `font-weight` with `font-{weight}` utilities.
+
+| Class | `font-weight` |
+|-------|---------------|
+| `font-thin` | `100` |
+| `font-extralight` | `200` |
+| `font-light` | `300` |
+| `font-normal` | `400` |
+| `font-medium` | `500` |
+| `font-semibold` | `600` |
+| `font-bold` | `700` |
+| `font-extrabold` | `800` |
+| `font-black` | `900` |
+
+```html
+<p class="font-normal">Body copy</p>
+<p class="font-medium">Slightly emphasized</p>
+<p class="font-semibold">Label or subheading</p>
+<p class="font-bold">Bold emphasis</p>
+```
+
+---
+
+## Text Alignment
+
+Control horizontal text alignment with `text-{align}` utilities.
+
+| Class | CSS |
+|-------|-----|
+| `text-left` | `text-align: left` |
+| `text-center` | `text-align: center` |
+| `text-right` | `text-align: right` |
+| `text-justify` | `text-align: justify` |
+| `text-start` | `text-align: start` |
+| `text-end` | `text-align: end` |
+
+```html
+<p class="text-left">Aligned left</p>
+<h1 class="text-center">Centered heading</h1>
+<p class="text-justify">Justified body copy for long-form reading.</p>
+```
+
+---
+
+## Text Decoration
+
+Control text decoration with these utilities.
+
+| Class | CSS |
+|-------|-----|
+| `underline` | `text-decoration-line: underline` |
+| `overline` | `text-decoration-line: overline` |
+| `line-through` | `text-decoration-line: line-through` |
+| `no-underline` | `text-decoration-line: none` |
+
+```html
+<a href="/" class="underline">Underlined link</a>
+<del class="line-through text-subtle">Removed item</del>
+<a href="/" class="no-underline hover:underline">Hover to underline</a>
+```
+
+---
+
+## Text Transform
+
+Control text casing with transform utilities.
+
+| Class | CSS |
+|-------|-----|
+| `uppercase` | `text-transform: uppercase` |
+| `lowercase` | `text-transform: lowercase` |
+| `capitalize` | `text-transform: capitalize` |
+| `normal-case` | `text-transform: none` |
+
+```html
+<span class="uppercase text-xs font-semibold tracking-wide text-subtle">Section label</span>
+<p class="capitalize">first letter of each word capitalized</p>
+```
+
+---
+
+## Font Style
+
+| Class | CSS |
+|-------|-----|
+| `italic` | `font-style: italic` |
+| `not-italic` | `font-style: normal` |
+
+```html
+<em class="italic">Emphasized text</em>
+<blockquote class="italic text-subtle">A great quote.</blockquote>
+```
+
+---
+
+## Whitespace & Word Break
+
+Control how text wraps and whitespace is handled.
+
+| Class | CSS |
+|-------|-----|
+| `whitespace-nowrap` | `white-space: nowrap` |
+| `whitespace-normal` | `white-space: normal` |
+| `whitespace-pre` | `white-space: pre` |
+| `whitespace-pre-wrap` | `white-space: pre-wrap` |
+| `truncate` | `overflow: hidden; text-overflow: ellipsis; white-space: nowrap` |
+| `break-words` | `overflow-wrap: break-word` |
+| `break-all` | `word-break: break-all` |
+| `break-normal` | `overflow-wrap: normal; word-break: normal` |
+
+```html
+<!-- Single-line truncation with ellipsis -->
+<p class="truncate w-48">This text is too long to fit and will be cut off</p>
+
+<!-- Preserve whitespace in code or preformatted content -->
+<pre class="whitespace-pre-wrap">Line 1\nLine 2</pre>
+
+<!-- Prevent long words from breaking layout -->
+<p class="break-words">https://very-long-url-that-could-break-the-layout.example.com</p>
+```

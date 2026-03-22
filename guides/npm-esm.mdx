@@ -1,0 +1,119 @@
+---
+title: "npm & ES Module usage"
+description: "Install TSS as an npm package and import it into your JavaScript or TypeScript project."
+---
+
+TSS publishes an ES Module build (`dist/tss.esm.js`) with full TypeScript declarations. Use it with any modern bundler — Vite, Webpack, Rollup, or esbuild.
+
+## Install
+
+<CodeGroup>
+
+```bash npm
+npm install tea-simple-smart-css
+```
+
+```bash yarn
+yarn add tea-simple-smart-css
+```
+
+```bash pnpm
+pnpm add tea-simple-smart-css
+```
+
+```bash bun
+bun add tea-simple-smart-css
+```
+
+</CodeGroup>
+
+## Import the public API
+
+```javascript
+import { version, refresh, toggleDark, parse } from 'tea-simple-smart-css';
+```
+
+### Named exports
+
+| Export | Type | Description |
+|--------|------|-------------|
+| `version` | `string` | Library version string |
+| `refresh` | `() => void` | Re-scans DOM and flushes pending CSS rules |
+| `toggleDark` | `() => boolean` | Toggles dark/light mode, persists to `localStorage` |
+| `parse` | `(className: string) => ParseResult \| null` | Parses a utility class name |
+
+## Auto-initialization
+
+Importing TSS in a browser context triggers the same automatic initialization as the CDN build — it fires on `DOMContentLoaded` and scans the full document. In a Node.js or SSR environment where `document` is undefined, initialization is skipped automatically.
+
+<Note>
+You do not need to call any setup function. The import itself is enough.
+</Note>
+
+## TypeScript
+
+TSS ships `dist/index.d.ts` and types are resolved automatically:
+
+```typescript index.ts
+import { toggleDark, parse } from 'tea-simple-smart-css';
+import type { ParseResult } from 'tea-simple-smart-css';
+
+const result: ParseResult | null = parse('flex');
+if (result) {
+  console.log(result.selector); // ".flex"
+  console.log(result.rules);    // { display: "flex" }
+}
+
+const isDark: boolean = toggleDark();
+```
+
+### TypeScript interface definitions
+
+```typescript
+export interface ParseResult {
+  selector: string;
+  rules: Record<string, string>;
+}
+
+export interface TSSAPI {
+  version:      string;
+  refresh():    void;
+  toggleDark(): boolean;
+  parse(className: string): ParseResult | null;
+}
+```
+
+## Vite example
+
+```javascript main.js
+import { toggleDark, refresh } from 'tea-simple-smart-css';
+
+// Theme toggle button
+document.getElementById('theme-btn').addEventListener('click', () => {
+  const isDark = toggleDark();
+  document.getElementById('theme-btn').textContent = isDark ? '☀️ Light' : '🌙 Dark';
+});
+
+// Refresh after dynamic content injection
+async function loadMoreItems() {
+  const container = document.getElementById('list');
+  container.innerHTML = await fetchItems();
+  refresh(); // ensure new classes are processed
+}
+```
+
+## Package exports
+
+The `package.json` `exports` field maps imports to the right build:
+
+```json
+{
+  "exports": {
+    ".": {
+      "types":   "./dist/index.d.ts",
+      "import":  "./dist/tss.esm.js",
+      "default": "./dist/tss.esm.js"
+    }
+  }
+}
+```

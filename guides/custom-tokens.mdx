@@ -1,0 +1,134 @@
+---
+title: "Custom tokens"
+description: "Override TSS semantic color tokens to match your brand."
+---
+
+TSS semantic color tokens are injected as CSS custom properties at `:root` when the script initializes. You can override any token with a `<style>` block placed after the TSS script tag.
+
+## Override with CSS
+
+Add a `<style>` tag **after** the TSS `<script>` tag to override tokens:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css/dist/tss.min.js"></script>
+
+<style>
+  /* Light mode overrides */
+  :root {
+    --tss-accent:  #7c3aed;   /* purple instead of default indigo */
+    --tss-primary: #fafaf9;   /* warm white */
+    --tss-base:    #f5f5f4;   /* warm gray page background */
+  }
+
+  /* Dark mode — media query */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --tss-accent:  #a78bfa;
+      --tss-primary: #1c1917;
+      --tss-base:    #0c0a09;
+    }
+  }
+
+  /* Dark mode — manual .dark class */
+  html.dark {
+    --tss-accent:  #a78bfa;
+    --tss-primary: #1c1917;
+    --tss-base:    #0c0a09;
+  }
+
+  html.light {
+    --tss-accent:  #7c3aed;
+    --tss-primary: #fafaf9;
+    --tss-base:    #f5f5f4;
+  }
+</style>
+```
+
+<Warning>
+Your `<style>` block must appear **after** the TSS `<script>` tag in the HTML. If placed before, TSS will overwrite your custom values when it initializes.
+</Warning>
+
+## All overridable CSS variables
+
+| CSS Variable | Default light | Default dark | Usage |
+|-------------|--------------|--------------|-------|
+| `--tss-primary` | `#ffffff` | `#09090b` | Main backgrounds, cards |
+| `--tss-secondary` | `#f3f4f6` | `#18181b` | Secondary surfaces |
+| `--tss-tertiary` | `#e5e7eb` | `#27272a` | Chips, borders |
+| `--tss-surface` | `#ffffff` | `#18181b` | Card, modal surfaces |
+| `--tss-base` | `#f9fafb` | `#09090b` | Page background |
+| `--tss-inverse` | `#111827` | `#f9fafb` | Inverted text / badges |
+| `--tss-muted` | `#f3f4f6` | `#27272a` | Disabled / muted areas |
+| `--tss-heading` | `#111827` | `#f9fafb` | H1–H6 text |
+| `--tss-body` | `#374151` | `#d1d5db` | Body copy |
+| `--tss-subtle` | `#6b7280` | `#9ca3af` | Captions, meta text |
+| `--tss-disabled` | `#9ca3af` | `#52525b` | Disabled state |
+| `--tss-link` | `#2563eb` | `#60a5fa` | Hyperlinks |
+| `--tss-outline` | `#e5e7eb` | `#3f3f46` | Border color |
+| `--tss-divider` | `#e5e7eb` | `#27272a` | Divider lines |
+| `--tss-ring` | `#3b82f6` | `#60a5fa` | Focus rings |
+| `--tss-success` | `#16a34a` | `#4ade80` | Success state |
+| `--tss-warning` | `#f59e0b` | `#fbbf24` | Warning state |
+| `--tss-danger` | `#dc2626` | `#f87171` | Error / danger state |
+| `--tss-info` | `#2563eb` | `#60a5fa` | Informational state |
+| `--tss-accent` | `#4f46e5` | `#818cf8` | Call-to-action, accent |
+
+## Complete brand customization example
+
+```html brand-theme.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Branded App</title>
+  <script src="https://cdn.jsdelivr.net/npm/tea-simple-smart-css/dist/tss.min.js"></script>
+  <style>
+    :root {
+      --tss-accent:   #7c3aed;
+      --tss-link:     #7c3aed;
+      --tss-ring:     #8b5cf6;
+      --tss-base:     #fafaf9;
+      --tss-surface:  #ffffff;
+      --tss-primary:  #ffffff;
+    }
+    html.dark {
+      --tss-accent:   #a78bfa;
+      --tss-link:     #a78bfa;
+      --tss-ring:     #8b5cf6;
+      --tss-base:     #0c0a09;
+      --tss-surface:  #1c1917;
+      --tss-primary:  #1c1917;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --tss-accent:   #a78bfa;
+        --tss-link:     #a78bfa;
+        --tss-ring:     #8b5cf6;
+        --tss-base:     #0c0a09;
+        --tss-surface:  #1c1917;
+        --tss-primary:  #1c1917;
+      }
+    }
+  </style>
+</head>
+<body class="bg-base text-body">
+  <h1 class="text-heading font-bold text-4xl">Branded with TSS</h1>
+  <a href="#" class="text-link underline">A purple link</a>
+  <button class="bg-accent text-primary px-4 py-2 rounded-lg" onclick="TSS.toggleDark()">
+    Toggle Theme
+  </button>
+</body>
+</html>
+```
+
+## ESM: inspecting buildThemeCSS
+
+If you are using TSS as an npm package, you can import `buildThemeCSS` from the source to inspect the generated theme CSS:
+
+```javascript
+import { buildThemeCSS } from 'tea-simple-smart-css/src/theme.js';
+
+const themeCSS = buildThemeCSS();
+console.log(themeCSS);
+// Outputs: full CSS string with :root, @media, html.dark, html.light blocks
+```
