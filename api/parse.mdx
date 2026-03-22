@@ -9,7 +9,7 @@ description: Parse a TSS utility class name into its CSS selector and rules.
 parse(className: string): ParseResult | null
 ```
 
-`parse` is also exported internally as `parseClass` — they are the same function.
+`parse` is the public name for the internal `parseClass` function. In the source, `parseClass` is exported from `parser.js` and re-exported as `parse` from the package entry point.
 
 | | |
 |---|---|

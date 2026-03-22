@@ -52,12 +52,12 @@ Example rows from `blue` and `gray`:
 
 ## Special values
 
-In addition to the color scale, `PALETTE` exports the following special values:
+`PALETTE` exports `white` (`#ffffff`), `black` (`#000000`), and `transparent` (`transparent`) as named entries. Additionally, `resolveColor()` in `parser.js` handles two keyword values that are not in `PALETTE` but are resolved directly:
 
-| Token | Value |
-|-------|-------|
-| `white` | #ffffff |
-| `black` | #000000 |
-| `transparent` | `transparent` |
-| `inherit` | `inherit` |
-| `current` | `currentColor` |
+| Token | Value | Example |
+|-------|-------|---------|
+| `white` | `#ffffff` | `bg-white`, `text-white` |
+| `black` | `#000000` | `bg-black`, `text-black` |
+| `transparent` | `transparent` | `bg-transparent`, `text-transparent` |
+| `inherit` | `inherit` | `text-inherit` (resolved in parser, not in PALETTE) |
+| `current` | `currentColor` | `text-current` (resolved in parser, not in PALETTE) |

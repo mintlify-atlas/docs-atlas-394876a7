@@ -31,7 +31,7 @@ Control the `display` property of an element.
 ```
 
 <Note>
-  `hidden` maps to `display: none`, which removes the element from the layout entirely. Use `opacity-0` or `invisible` if you want to hide it while preserving space.
+  `hidden` maps to `display: none`, which removes the element from the layout entirely. Use `opacity-0` if you want to hide an element visually while preserving its space in the layout.
 </Note>
 
 ---
@@ -96,6 +96,42 @@ Control how content that overflows its container is handled.
   <div class="flex gap-4">
     <!-- slides -->
   </div>
+</div>
+```
+
+---
+
+## Inset (Top / Right / Bottom / Left)
+
+Position utilities for controlling the `top`, `right`, `bottom`, and `left` CSS properties. Accepts any key from the [spacing scale](/utilities/spacing#spacing-scale). Negative values are supported with the `-` prefix.
+
+| Prefix | CSS Properties |
+|--------|----------------|
+| `inset-{key}` | `top`, `right`, `bottom`, `left` |
+| `inset-x-{key}` | `left`, `right` |
+| `inset-y-{key}` | `top`, `bottom` |
+| `top-{key}` | `top` |
+| `right-{key}` | `right` |
+| `bottom-{key}` | `bottom` |
+| `left-{key}` | `left` |
+
+```html
+<!-- Full overlay covering the parent -->
+<div class="absolute inset-0 bg-black opacity-50"></div>
+
+<!-- Stick to top and fill width -->
+<div class="absolute inset-x-0 top-0 h-16 bg-surface">Banner</div>
+
+<!-- Position a badge in the top-right corner -->
+<div class="relative inline-block">
+  <img src="avatar.png" class="rounded-full w-10 h-10" />
+  <span class="absolute top-0 right-0 w-3 h-3 bg-success rounded-full"></span>
+</div>
+
+<!-- Negative inset to overlap a border -->
+<div class="relative">
+  <div class="absolute -top-2 -left-2 w-4 h-4 bg-accent rounded-full"></div>
+  Content
 </div>
 ```
 

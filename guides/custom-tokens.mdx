@@ -121,14 +121,13 @@ Your `<style>` block must appear **after** the TSS `<script>` tag in the HTML. I
 </html>
 ```
 
-## ESM: inspecting buildThemeCSS
+## Understanding the generated theme CSS
 
-If you are using TSS as an npm package, you can import `buildThemeCSS` from the source to inspect the generated theme CSS:
+TSS injects a `<style id="tss-theme">` element on initialization containing all the CSS custom property definitions. You can inspect it in browser DevTools to see the exact generated output:
 
 ```javascript
-import { buildThemeCSS } from 'tea-simple-smart-css/src/theme.js';
-
-const themeCSS = buildThemeCSS();
-console.log(themeCSS);
-// Outputs: full CSS string with :root, @media, html.dark, html.light blocks
+// Inspect the generated theme CSS in the browser
+const themeStyle = document.getElementById('tss-theme');
+console.log(themeStyle.textContent);
+// Outputs the full :root, @media, html.dark, html.light CSS blocks
 ```
